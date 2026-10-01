@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#2346a0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="manifest" href="./manifest.json">
+<title>Shiv Textiles Billing</title>
+<style>
+:root{--blue:#2346a0;--blue2:#3977ee;--bg:#f2f5fb;--card:#fff;--ink:#172033;--muted:#647087;--line:#dce3ef;--green:#16834a;--red:#c0392b}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+button,input,select{font:inherit}button{cursor:pointer;border:0;border-radius:12px;padding:11px 14px;font-weight:700;background:#e9eef9;color:var(--ink)}button:disabled{opacity:.45;cursor:not-allowed}.primary{background:linear-gradient(135deg,var(--blue2),var(--blue));color:#fff}.success{background:#e0f6e9;color:#116536}.danger{background:#fff0ee;color:var(--red)}.small{padding:7px 10px;border-radius:9px;font-size:13px}.muted{color:var(--muted)}.hidden{display:none!important}
+header{background:linear-gradient(130deg,#3977ee,#203e92);color:#fff;padding:22px 16px 18px;border-radius:0 0 24px 24px;box-shadow:0 6px 20px #203e9222}
+.headrow{display:flex;align-items:center;gap:12px}.logo{width:48px;height:48px;border-radius:15px;background:#ffffff25;border:1px solid #ffffff55;display:grid;place-items:center;font-size:20px;font-weight:900}.headtitle{font-size:21px;font-weight:850;letter-spacing:-.5px}.subtitle{opacity:.85;font-size:13px}
+main{max-width:850px;margin:auto;padding:14px 12px 40px}.screen{display:none}.screen.active{display:block}.card{background:var(--card);border:1px solid var(--line);border-radius:17px;padding:15px;margin:12px 0;box-shadow:0 3px 12px #1a2d4b08}.sectiontitle{font-size:17px;font-weight:850;margin:0 0 12px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field{display:flex;flex-direction:column;gap:5px;margin-bottom:10px}.field label{font-size:12px;font-weight:800;color:var(--muted)}input,select{width:100%;min-width:0;border:1px solid #d5deec;border-radius:11px;padding:11px 12px;background:#fff;color:var(--ink);outline:none}input:focus,select:focus{border-color:var(--blue2);box-shadow:0 0 0 3px #3977ee20}.btnrow{display:flex;gap:8px;flex-wrap:wrap}.btnrow>*{flex:1}.tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:14px 0}.tab{padding:10px 5px;font-size:12px;background:#e7edf8;border-radius:10px}.tab.active{background:var(--blue);color:#fff}.hero{padding:24px 18px;text-align:center}.heroicon{font-size:50px}.hero h1{margin:6px 0;font-size:27px}.hero p{color:var(--muted);margin:4px 0 20px}.hero button{width:100%;max-width:340px;padding:15px;font-size:17px}
+.statgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.stat{padding:12px 8px;background:#f5f8ff;border-radius:12px;text-align:center}.stat strong{display:block;font-size:19px}.stat span{font-size:11px;color:var(--muted)}
+.productlist{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.product{border:1px solid var(--line);border-radius:13px;padding:11px;background:#fff;display:flex;flex-direction:column;gap:6px}.productname{font-weight:800;overflow-wrap:anywhere}.productmeta{font-size:12px;color:var(--muted)}.productbottom{display:flex;align-items:center;justify-content:space-between;gap:5px;margin-top:auto}.price{font-weight:850;color:var(--blue)}.cartrow{display:grid;grid-template-columns:1fr auto;gap:10px;padding:11px 0;border-bottom:1px solid var(--line)}.cartrow:last-child{border-bottom:0}.qtycontrols{display:flex;align-items:center;gap:7px}.qtycontrols button{padding:5px 9px}.totalline{display:flex;justify-content:space-between;gap:10px;padding:5px 0}.grand{font-size:20px;font-weight:900;border-top:1px solid var(--line);margin-top:6px;padding-top:12px}.pill{font-size:11px;padding:4px 8px;border-radius:99px;background:#edf2ff;color:var(--blue);font-weight:800}.checkrow{display:flex;align-items:flex-start;gap:10px;padding:12px;border:1px solid var(--line);border-radius:12px;margin:8px 0;background:#fff}.checkrow input{width:20px;height:20px;margin:1px 0 0;flex-shrink:0}.checkrow.done{background:#eefaf2;opacity:.75}.checkrow.done .checkname{text-decoration:line-through}.empty{text-align:center;padding:25px 10px;color:var(--muted)}.notice{padding:11px 12px;background:#fff8df;border:1px solid #f1df9b;border-radius:12px;font-size:13px;color:#74580a;margin:10px 0}.historyitem{padding:12px 0;border-bottom:1px solid var(--line)}.historyitem:last-child{border:0}.historytop{display:flex;justify-content:space-between;gap:8px;font-weight:800}.footer{text-align:center;color:var(--muted);font-size:12px;padding:12px}
+@media(min-width:650px){.productlist{grid-template-columns:repeat(3,minmax(0,1fr))}.tabs .tab{font-size:14px}.card{padding:18px}}
+@media print{body{background:#fff}.no-print,header,.tabs{display:none!important}main{padding:0;max-width:none}.screen{display:none!important}#printArea{display:block!important}.card{box-shadow:none;border:0}.print-table{width:100%;border-collapse:collapse}.print-table th,.print-table td{border:1px solid #aaa;padding:7px;text-align:left}.print-table th:last-child,.print-table td:last-child{text-align:right}}
+</style>
+</head>
+<body>
+<header>
+  <div class="headrow"><div class="logo">ST</div><div><div class="headtitle">Shiv Textiles</div><div class="subtitle">Billing made simple · Works offline on this device</div></div></div>
+</header>
+<main>
+  <section id="home" class="screen active">
+    <div class="card hero">
+      <div class="heroicon">🧾</div>
+      <h1>Shiv Textiles Billing</h1>
+      <p>Create a bill, take payment, then tick off each item while packing the order.</p>
+      <button class="primary" id="startBtn" type="button">Start Billing →</button>
+      <div class="muted" style="font-size:12px;margin-top:13px">Quick · Simple · No account needed</div>
+    </div>
+    <div class="card"><div class="sectiontitle">Today's overview</div><div class="statgrid"><div class="stat"><strong id="todayBills">0</strong><span>Bills today</span></div><div class="stat"><strong id="todaySales">₹0</strong><span>Today's sales</span></div><div class="stat"><strong id="productCount">0</strong><span>Products saved</span></div></div></div>
+    <div class="card"><div class="sectiontitle">Quick actions</div><div class="btnrow"><button id="homeNewBill" class="primary">＋ New Bill</button><button id="homeProducts">📦 Products</button><button id="homeHistory">🧾 Bill History</button></div></div>
+  </section>
+
+  <nav class="tabs no-print" aria-label="App sections">
+    <button class="tab active" data-screen="bill">🧾 Bill</button>
+    <button class="tab" data-screen="products">📦 Products</button>
+    <button class="tab" data-screen="packing">✅ Packing</button>
+    <button class="tab" data-screen="history">📚 History</button>
+  </nav>
+
+  <section id="bill" class="screen">
+    <div class="card">
+      <div class="sectiontitle">1. Customer details</div>
+      <div class="grid2">
+        <div class="field"><label for="customerName">Customer / Shop name (optional)</label><input id="customerName" placeholder="e.g. Gupta Traders"></div>
+        <div class="field"><label for="customerPhone">Phone (optional)</label><input id="customerPhone" inputmode="tel" placeholder="Phone number"></div>
+      </div>
+      <div class="field"><label for="billNote">Note (optional)</label><input id="billNote" placeholder="e.g. Deliver tomorrow"></div>
+    </div>
+    <div class="card">
+      <div class="sectiontitle">2. Add items to bill</div>
+      <div class="field"><label for="productSearch">Search products</label><input id="productSearch" placeholder="Search bedsheet, blanket, chatai..."></div>
+      <div id="billProducts" class="productlist"></div>
+      <details style="margin-top:14px"><summary style="font-weight:800;cursor:pointer">＋ Add a one-time / custom item</summary>
+        <div class="grid2" style="margin-top:12px">
+          <div class="field"><label for="customName">Item name</label><input id="customName" placeholder="Item name"></div>
+          <div class="field"><label for="customPrice">Price per item (₹)</label><input id="customPrice" type="number" min="0" step="0.01" placeholder="0"></div>
+          <div class="field"><label for="customQty">Quantity</label><input id="customQty" type="number" min="1" step="1" value="1"></div>
+        </div><button id="addCustom" class="primary">Add custom item</button>
+      </details>
+    </div>
+    <div class="card">
+      <div class="sectiontitle">3. Bill items</div>
+      <div id="cartItems"><div class="empty">No items yet. Add products above.</div></div>
+      <div class="field" style="margin-top:12px"><label for="discount">Discount (₹)</label><input id="discount" type="number" min="0" step="0.01" value="0"></div>
+      <div class="totalline"><span>Subtotal</span><strong id="subtotal">₹0</strong></div>
+      <div class="totalline"><span>Discount</span><strong id="discountShown">− ₹0</strong></div>
+      <div class="totalline grand"><span>Total</span><span id="total">₹0</span></div>
+      <div class="grid2" style="margin-top:12px">
+        <div class="field"><label for="paidAmount">Amount received (₹)</label><input id="paidAmount" type="number" min="0" step="0.01" value="0"></div>
+        <div class="field"><label for="paymentMode">Payment method</label><select id="paymentMode"><option>Cash</option><option>UPI</option><option>Card</option><option>Credit / Udhaar</option><option>Mixed</option></select></div>
+      </div>
+      <div class="totalline"><span>Balance due</span><strong id="due">₹0</strong></div>
+      <div class="btnrow" style="margin-top:14px"><button id="clearCart" class="danger">Clear bill</button><button id="saveBill" class="primary">Save Bill & Pack Items ✓</button></div>
+      <div class="muted" style="font-size:12px;margin-top:9px">Saving a bill keeps it on this device and opens the packing checklist.</div>
+    </div>
+  </section>
+
+  <section id="products" class="screen">
+    <div class="card">
+      <div class="sectiontitle">Product catalogue</div>
+      <p class="muted" style="margin-top:-5px">Save your regular products and their selling price. This list stays on this device.</p>
+      <div class="grid2">
+        <div class="field"><label for="newProductName">Product name</label><input id="newProductName" placeholder="e.g. Double bedsheet"></div>
+        <div class="field"><label for="newProductPrice">Selling price (₹)</label><input id="newProductPrice" type="number" min="0" step="0.01" placeholder="e.g. 250"></div>
+      </div>
+      <div class="grid2"><div class="field"><label for="newProductUnit">Unit</label><select id="newProductUnit"><option>piece</option><option>pair</option><option>set</option><option>packet</option><option>dozen</option><option>kg</option><option>meter</option></select></div><div class="field"><label for="newProductStock">Stock (optional)</label><input id="newProductStock" type="number" min="0" step="1" placeholder="Not tracked"></div></div>
+      <button id="saveProduct" class="primary" style="width:100%">＋ Save Product</button>
+    </div>
+    <div class="card"><div class="field"><label for="catalogSearch">Find a saved product</label><input id="catalogSearch" placeholder="Search catalogue"></div><div id="catalogList"></div></div>
+    <div class="notice">Tip: Start by adding your most-sold items: bedsheets, pillows, blankets, chatai / polymats, umbrellas, bags, curtains and mosquito nets.</div>
+  </section>
+
+  <section id="packing" class="screen">
+    <div class="card">
+      <div class="sectiontitle">Packing checklist</div>
+      <p class="muted" style="margin-top:-5px">Tick each item as you take it from the shop. This helps match the goods against the saved bill.</p>
+      <div id="packingContent"><div class="empty">No saved bill selected. Save a bill first, or open one from History.</div></div>
+    </div>
+  </section>
+
+  <section id="history" class="screen">
+    <div class="card"><div class="sectiontitle">Saved bills</div><div class="field"><label for="historySearch">Search bills</label><input id="historySearch" placeholder="Bill number or customer"></div><div id="historyList"></div></div>
+  </section>
+
+  <section id="printArea" class="screen">
+    <div class="card" id="printBill"></div>
+  </section>
+  <div class="footer no-print">Shiv Textiles · Your bills are stored locally in this browser.</div>
+</main>
+<script>
+(function(){
+'use strict';
+const $ = id => document.getElementById(id);
+const money = n => '₹' + (Number(n)||0).toLocaleString('en-IN',{minimumFractionDigits:0,maximumFractionDigits:2});
+const todayKey = () => new Date().toLocaleDateString('en-CA');
+const dateText = d => new Date(d).toLocaleString('en-IN',{dateStyle:'medium',timeStyle:'short'});
+const escapeHtml = s => String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const defaultProducts = [
+ {id:'p1',name:'Bedsheet',price:250,unit:'piece'},{id:'p2',name:'Pillow',price:80,unit:'piece'},
+ {id:'p3',name:'Blanket',price:350,unit:'piece'},{id:'p4',name:'Chatai / Polymat',price:100,unit:'piece'},
+ {id:'p5',name:'Umbrella',price:120,unit:'piece'},{id:'p6',name:'School Bag',price:300,unit:'piece'},
+ {id:'p7',name:'Luggage Bag',price:450,unit:'piece'},{id:'p8',name:'Curtain',price:200,unit:'pair'},
+ {id:'p9',name:'Mosquito Net',price:180,unit:'piece'},{id:'p10',name:'Dari',price:250,unit:'piece'}
+];
+function read(key,fallback){try{const v=JSON.parse(localStorage.getItem(key));return v??fallback}catch(e){return fallback}}
+let products=read('shiv_products_v7',null); if(!Array.isArray(products)){products=defaultProducts;localStorage.setItem('shiv_products_v7',JSON.stringify(products))}
+let bills=read('shiv_bills_v7',[]);
+let cart=[]; let activeBillId=null;
+function persist(){localStorage.setItem('shiv_products_v7',JSON.stringify(products));localStorage.setItem('shiv_bills_v7',JSON.stringify(bills))}
+function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.toggle('active',s.id===id));document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.dataset.screen===id));if(id==='products')renderCatalog();if(id==='bill')renderBillProducts();if(id==='history')renderHistory();if(id==='packing')renderPacking();window.scrollTo({top:0,behavior:'smooth'})}
+function setText(id,value){$(id).textContent=value}
+function totals(){const subtotal=cart.reduce((s,i)=>s+i.price*i.qty,0);const discount=Math.max(0,Number($('discount').value)||0);const total=Math.max(0,subtotal-discount);const paid=Math.max(0,Number($('paidAmount').value)||0);return {subtotal,discount,total,paid,due:Math.max(0,total-paid)}}
+function renderStats(){const t=todayKey();const todays=bills.filter(b=>b.dateKey===t);setText('todayBills',todays.length);setText('todaySales',money(todays.reduce((s,b)=>s+b.total,0)));setText('productCount',products.length)}
+function renderBillProducts(){const q=$('productSearch').value.trim().toLowerCase();const list=products.filter(p=>p.name.toLowerCase().includes(q));$('billProducts').innerHTML=list.length?list.map(p=>`<div class="product"><div class="productname">${escapeHtml(p.name)}</div><div class="productmeta">Per ${escapeHtml(p.unit||'piece')}</div><div class="productbottom"><span class="price">${money(p.price)}</span><button class="primary small" data-add="${escapeHtml(p.id)}">＋ Add</button></div></div>`).join(''):'<div class="empty" style="grid-column:1/-1">No matching products. Add it in Products or use custom item.</div>'}
+function renderCart(){if(!cart.length){$('cartItems').innerHTML='<div class="empty">No items yet. Add products above.</div>'}else{$('cartItems').innerHTML=cart.map((i,n)=>`<div class="cartrow"><div><strong>${escapeHtml(i.name)}</strong><div class="muted" style="font-size:12px">${money(i.price)} × ${i.qty} = <strong>${money(i.price*i.qty)}</strong></div><div class="field" style="margin:7px 0 0;max-width:130px"><label>Price each (₹)</label><input type="number" min="0" step="0.01" data-price="${n}" value="${i.price}"></div></div><div style="text-align:right"><div class="qtycontrols"><button data-minus="${n}" aria-label="Decrease">−</button><strong>${i.qty}</strong><button data-plus="${n}" aria-label="Increase">＋</button></div><button class="danger small" data-remove="${n}" style="margin-top:8px">Remove</button></div></div>`).join('')}
+const t=totals();setText('subtotal',money(t.subtotal));setText('discountShown','− '+money(t.discount));setText('total',money(t.total));setText('due',money(t.due))}
+function addToCart(p,qty=1){const found=cart.find(i=>i.productId===p.id&&i.name===p.name);if(found)found.qty+=qty;else cart.push({productId:p.id,name:p.name,price:Number(p.price)||0,qty:Math.max(1,Number(qty)||1),unit:p.unit||'piece',packed:false});renderCart()}
+function renderCatalog(){const q=$('catalogSearch').value.trim().toLowerCase();const list=products.filter(p=>p.name.toLowerCase().includes(q));$('catalogList').innerHTML=list.length?list.map(p=>`<div class="historyitem"><div class="historytop"><span>${escapeHtml(p.name)}</span><span>${money(p.price)}</span></div><div class="muted" style="font-size:12px">Unit: ${escapeHtml(p.unit||'piece')}${p.stock!==undefined&&p.stock!==''?` · Stock: ${escapeHtml(p.stock)}`:''}</div><div class="btnrow" style="margin-top:8px"><button class="small" data-edit-product="${escapeHtml(p.id)}">Edit price</button><button class="danger small" data-delete-product="${escapeHtml(p.id)}">Delete</button></div></div>`).join(''):'<div class="empty">No products found.</div>'}
+function renderPacking(){const bill=bills.find(b=>b.id===activeBillId)||bills[0];if(!bill){$('packingContent').innerHTML='<div class="empty">No saved bill selected. Save a bill first, or open one from History.</div>';return}activeBillId=bill.id;const packed=bill.items.filter(i=>i.packed).length;$('packingContent').innerHTML=`<div class="notice"><strong>${escapeHtml(bill.number)}</strong> · ${escapeHtml(bill.customer||'Walk-in customer')}<br>Total: ${money(bill.total)} · Packed ${packed}/${bill.items.length} item lines</div>${bill.items.map((i,n)=>`<label class="checkrow ${i.packed?'done':''}"><input type="checkbox" data-packed="${n}" ${i.packed?'checked':''}><span style="flex:1"><span class="checkname" style="display:block;font-weight:800">${escapeHtml(i.name)}</span><span class="muted" style="font-size:12px">Take ${i.qty} ${escapeHtml(i.unit||'piece')}${i.qty>1?'s':''} · ${money(i.price)} each</span></span><strong>${money(i.qty*i.price)}</strong></label>`).join('')}<div class="btnrow" style="margin-top:12px"><button id="packingAll" class="success">Mark all packed</button><button id="packingPrint" class="primary">Print bill</button></div>${packed===bill.items.length?'<div class="notice" style="background:#e7f8ec;border-color:#b5e4c3;color:#155b2c">✓ All item lines packed. Please double-check quantities before handing over.</div>':''}`}
+function renderHistory(){const q=$('historySearch').value.trim().toLowerCase();const list=[...bills].reverse().filter(b=>(b.number+' '+(b.customer||'')+' '+(b.phone||'')).toLowerCase().includes(q));$('historyList').innerHTML=list.length?list.map(b=>`<div class="historyitem"><div class="historytop"><span>${escapeHtml(b.number)}</span><span>${money(b.total)}</span></div><div class="muted" style="font-size:12px">${escapeHtml(b.customer||'Walk-in customer')} · ${escapeHtml(dateText(b.createdAt))}</div><div class="muted" style="font-size:12px">Payment: ${escapeHtml(b.paymentMode)} · Due: ${money(b.due)} · Packed ${b.items.filter(i=>i.packed).length}/${b.items.length}</div><div class="btnrow" style="margin-top:8px"><button class="primary small" data-open-bill="${escapeHtml(b.id)}">Packing checklist</button><button class="small" data-print-bill="${escapeHtml(b.id)}">View / Print</button><button class="danger small" data-delete-bill="${escapeHtml(b.id)}">Delete</button></div></div>`).join(''):'<div class="empty">No saved bills yet.</div>'}
+function saveBill(){if(!cart.length){alert('Please add at least one item before saving the bill.');return}const t=totals();if(t.discount>t.subtotal){if(!confirm('Discount is more than subtotal. Save total as ₹0?'))return}const now=new Date();const number='ST-'+now.getFullYear().toString().slice(-2)+String(now.getMonth()+1).padStart(2,'0')+String(now.getDate()).padStart(2,'0')+'-'+String(bills.length+1).padStart(3,'0');const bill={id:'b'+Date.now(),number,createdAt:now.toISOString(),dateKey:todayKey(),customer:$('customerName').value.trim(),phone:$('customerPhone').value.trim(),note:$('billNote').value.trim(),items:cart.map(i=>({...i,packed:false})),subtotal:t.subtotal,discount:t.discount,total:t.total,paid:Math.min(t.paid,t.total),due:t.due,paymentMode:$('paymentMode').value};bills.push(bill);activeBillId=bill.id;persist();cart=[];$('customerName').value='';$('customerPhone').value='';$('billNote').value='';$('discount').value='0';$('paidAmount').value='0';renderCart();renderStats();showScreen('packing')}
+function buildPrint(b){$('printBill').innerHTML=`<div style="text-align:center"><h2 style="margin:0">SHIV TEXTILES</h2><div>Bill / Sales Receipt</div><div>${escapeHtml(b.number)}</div></div><hr><div><strong>Date:</strong> ${escapeHtml(dateText(b.createdAt))}<br><strong>Customer:</strong> ${escapeHtml(b.customer||'Walk-in customer')}${b.phone?'<br><strong>Phone:</strong> '+escapeHtml(b.phone):''}${b.note?'<br><strong>Note:</strong> '+escapeHtml(b.note):''}</div><table class="print-table" style="margin-top:12px"><thead><tr><th>Item</th><th>Qty</th><th>Rate</th><th>Amount</th></tr></thead><tbody>${b.items.map(i=>`<tr><td>${escapeHtml(i.name)}</td><td>${i.qty} ${escapeHtml(i.unit||'')}</td><td>${money(i.price)}</td><td>${money(i.qty*i.price)}</td></tr>`).join('')}</tbody></table><div style="max-width:300px;margin:12px 0 0 auto"><div class="totalline"><span>Subtotal</span><strong>${money(b.subtotal)}</strong></div><div class="totalline"><span>Discount</span><strong>${money(b.discount)}</strong></div><div class="totalline grand"><span>Total</span><strong>${money(b.total)}</strong></div><div class="totalline"><span>Received</span><strong>${money(b.paid)}</strong></div><div class="totalline"><span>Balance due</span><strong>${money(b.due)}</strong></div><div class="totalline"><span>Payment</span><strong>${escapeHtml(b.paymentMode)}</strong></div></div><p style="text-align:center;margin-top:28px">Thank you for shopping with Shiv Textiles!</p>`;showScreen('printArea');setTimeout(()=>window.print(),250)}
+$('startBtn').addEventListener('click',()=>showScreen('bill'));
+$('homeNewBill').addEventListener('click',()=>showScreen('bill'));
+$('homeProducts').addEventListener('click',()=>showScreen('products'));
+$('homeHistory').addEventListener('click',()=>showScreen('history'));
+document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>showScreen(t.dataset.screen)));
+$('productSearch').addEventListener('input',renderBillProducts);
+$('catalogSearch').addEventListener('input',renderCatalog);
+$('historySearch').addEventListener('input',renderHistory);
+$('discount').addEventListener('input',renderCart);$('paidAmount').addEventListener('input',renderCart);
+$('billProducts').addEventListener('click',e=>{const b=e.target.closest('[data-add]');if(!b)return;const p=products.find(p=>p.id===b.dataset.add);if(p)addToCart(p)});
+$('cartItems').addEventListener('click',e=>{const t=e.target;if(t.dataset.plus!==undefined){cart[Number(t.dataset.plus)].qty++;renderCart()}if(t.dataset.minus!==undefined){const i=cart[Number(t.dataset.minus)];i.qty--;if(i.qty<=0)cart.splice(Number(t.dataset.minus),1);renderCart()}if(t.dataset.remove!==undefined){cart.splice(Number(t.dataset.remove),1);renderCart()}});
+$('cartItems').addEventListener('change',e=>{if(e.target.dataset.price!==undefined){cart[Number(e.target.dataset.price)].price=Math.max(0,Number(e.target.value)||0);renderCart()}});
+$('addCustom').addEventListener('click',()=>{const name=$('customName').value.trim(),price=Number($('customPrice').value),qty=Math.max(1,Number($('customQty').value)||1);if(!name||$('customPrice').value===''||price<0){alert('Please enter an item name and a valid price.');return}addToCart({id:'custom-'+Date.now(),name,price,unit:'piece'},qty);$('customName').value='';$('customPrice').value='';$('customQty').value='1'});
+$('clearCart').addEventListener('click',()=>{if(!cart.length||confirm('Clear all items from this unsaved bill?')){cart=[];renderCart()}});
+$('saveBill').addEventListener('click',saveBill);
+$('saveProduct').addEventListener('click',()=>{const name=$('newProductName').value.trim(),priceField=$('newProductPrice').value,price=Number(priceField);if(!name||priceField===''||price<0){alert('Enter product name and a valid selling price.');return}const product={id:'p'+Date.now(),name,price,unit:$('newProductUnit').value};if($('newProductStock').value!=='')product.stock=Number($('newProductStock').value);products.push(product);persist();$('newProductName').value='';$('newProductPrice').value='';$('newProductStock').value='';renderCatalog();renderBillProducts();renderStats();alert('Product saved.')});
+$('catalogList').addEventListener('click',e=>{const t=e.target;if(t.dataset.deleteProduct){const p=products.find(p=>p.id===t.dataset.deleteProduct);if(p&&confirm('Delete '+p.name+' from the catalogue?')){products=products.filter(p=>p.id!==t.dataset.deleteProduct);persist();renderCatalog();renderBillProducts();renderStats()}}if(t.dataset.editProduct){const p=products.find(p=>p.id===t.dataset.editProduct);if(p){const val=prompt('New selling price for '+p.name, p.price);if(val!==null&&val.trim()!==''&&Number(val)>=0){p.price=Number(val);persist();renderCatalog();renderBillProducts()}}}});
+$('packingContent').addEventListener('change',e=>{if(e.target.dataset.packed!==undefined){const b=bills.find(b=>b.id===activeBillId);if(b){b.items[Number(e.target.dataset.packed)].packed=e.target.checked;persist();renderPacking();renderHistory()}}});
+$('packingContent').addEventListener('click',e=>{if(e.target.id==='packingAll'){const b=bills.find(b=>b.id===activeBillId);if(b){b.items.forEach(i=>i.packed=true);persist();renderPacking();renderHistory()}}if(e.target.id==='packingPrint'){const b=bills.find(b=>b.id===activeBillId);if(b)buildPrint(b)}});
+$('historyList').addEventListener('click',e=>{const t=e.target;if(t.dataset.openBill){activeBillId=t.dataset.openBill;showScreen('packing')}if(t.dataset.printBill){const b=bills.find(b=>b.id===t.dataset.printBill);if(b)buildPrint(b)}if(t.dataset.deleteBill){const b=bills.find(b=>b.id===t.dataset.deleteBill);if(b&&confirm('Delete bill '+b.number+'? This cannot be undone.')){bills=bills.filter(x=>x.id!==b.id);if(activeBillId===b.id)activeBillId=null;persist();renderHistory();renderStats();renderPacking()}}});
+renderBillProducts();renderCart();renderCatalog();renderHistory();renderStats();
+if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}))}
+})();
+</script>
+</body>
+</html>
